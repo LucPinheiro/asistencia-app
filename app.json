@@ -4,7 +4,7 @@
     "slug": "asistencia-app",
     "version": "1.2.0",
     "orientation": "portrait",
-    "icon": "./assets/images/Component.png",
+    "icon": "./assets/images/splash-icon.png",
     "scheme": "assistencia",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -13,12 +13,7 @@
       "runtimeVersion": {
         "policy": "appVersion"
       },
-      "updates": {
-        "enabled": true,
-        "fallbackToCacheTimeout": 0,
-        "url": "https://expo.dev/accounts/adry01/projects/asistencia-app/builds/ee285e9d-9dfe-40f5-ac23-06d972b5018c"
-      },
-      "bundleIdentifier": "com.adry01.asistenciaapp",
+      "bundleIdentifier": "com.lucpinheiro.asistenciaapp",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }
@@ -31,7 +26,7 @@
         "imageHeight": 192
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.adry01.asistenciaapp",
+      "package": "com.lucpinheiro.asistenciaapp",
       "runtimeVersion": "1.0.0",
       "permissions": [
         "ACCESS_FINE_LOCATION",
@@ -48,13 +43,6 @@
     "experiments": {
       "typedRoutes": true
     },
-    "extra": {
-      "router": {},
-      "eas": {
-        "projectId": "1968fc7e-f27a-439a-b104-402c896b8a1d"
-      }
-    },
-    "icon": "./assets/images/splash-icon.png",
     "plugins": [
       "expo-router",
       [
@@ -78,9 +66,12 @@
         }
       ]
     ],
-    "updates": {
-      "url": "https://u.expo.dev/1968fc7e-f27a-439a-b104-402c896b8a1d"
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "46a36144-4a6c-485b-824c-f1b6317a2e0e"
+      }
     },
-    "owner": "adry01"
+    "owner": "lucpinheiro"
   }
 }

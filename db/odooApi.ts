@@ -37,7 +37,7 @@ export async function getPedirAvance({ uid, pass }: { uid: number; pass: string 
 }
 
 // Re-exportar para uso en hooks y otros módulos
-export { DB, RPC_URL, rpcCall };
+//export { DB, RPC_URL, rpcCall };
 
 // Obtener todos los proyectos asignados al empleado
 export async function getEmployeeAllProjects({ uid, pass }: { uid: number; pass: string }) {
