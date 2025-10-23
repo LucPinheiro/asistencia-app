@@ -1,12 +1,11 @@
+// components/AttendanceKiosk/steps/ProjectTaskStep.tsx
+import { useState } from "react";
 import { Button, ScrollView, Text, TextInput, View } from "react-native";
-import { SuccessModal } from '../../SuccessModal';
+import { SuccessModal } from "../../ui/SuccessModal";
 import styles from "../AttendanceStyles";
-import ProjectTaskDropdowns from "../otros/ProjectTaskDropdowns";
 import { ProjectTaskStepProps } from "./AttendanceStepTypes";
-
-
-
-import React from "react";
+// Ajusta la ruta si tu dropdown está en otro sitio:
+import ProjectTaskDropdowns from "../otros/ProjectTaskDropdowns";
 
 export function ProjectTaskStep({
   loading,
@@ -34,25 +33,27 @@ export function ProjectTaskStep({
   currentProject,
   currentTask,
 }: ProjectTaskStepProps) {
-  // Eliminado: log de observaciones innecesario y campo opcional
+  const [successModalVisible, setSuccessModalVisible] = useState(false);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [isChangingTask] = useState(false);
 
-  // En modo changing_task, usar los pending y los setters safe
   const projectListSelectedProject = mode === "changing_task" ? pendingProject : selectedProject;
   const projectListSelectedTask = mode === "changing_task" ? pendingTask : selectedTask;
-  const projectListSetProject = mode === "changing_task" && safeSetPendingProject ? safeSetPendingProject : setSelectedProject;
-  const projectListSetTask = mode === "changing_task" && safeSetPendingTask ? safeSetPendingTask : setSelectedTask;
-
-
+  const projectListSetProject =
+    mode === "changing_task" && safeSetPendingProject ? safeSetPendingProject : setSelectedProject;
+  const projectListSetTask =
+    mode === "changing_task" && safeSetPendingTask ? safeSetPendingTask : setSelectedTask;
 
   return (
     <ScrollView
-      contentContainerStyle={{ flexGrow: 1, justifyContent: 'center', padding: 16 }}
+      contentContainerStyle={{ flexGrow: 1, justifyContent: "center", padding: 16 }}
       keyboardShouldPersistTaps="handled"
     >
-      <View style={{ width: '100%', maxWidth: 500, alignSelf: 'center' }}>
-        <Text style={[styles.welcome, { textAlign: 'center', marginBottom: 16 }]}> 
+      <View style={{ width: "100%", maxWidth: 500, alignSelf: "center" }}>
+        <Text style={[styles.welcome, { textAlign: "center", marginBottom: 16 }]}>
           {mode === "welcome" ? "¡Bienvenido!" : "Selecciona nueva tarea"}
         </Text>
+
         <ProjectTaskDropdowns
           uid={uid}
           pass={pass}
@@ -66,24 +67,23 @@ export function ProjectTaskStep({
           currentTask={currentTask}
         />
 
-        {/* Mostrar campo de avance solo si pedirAvanceMsg es un mensaje (no "no") */}
         {pedirAvanceMsg && pedirAvanceMsg !== "no" ? (
-          <View style={{ marginVertical: 16, width: '100%', alignItems: 'center', justifyContent: 'center' }}>
+          <View style={{ marginVertical: 16, width: "100%", alignItems: "center", justifyContent: "center" }}>
             <TextInput
               placeholder="Ingresa el avance"
               keyboardType="numeric"
-              value={typeof avanceInput === 'string' ? avanceInput : ''}
+              value={typeof avanceInput === "string" ? avanceInput : ""}
               onChangeText={setAvanceInput ? setAvanceInput : () => {}}
               style={{
                 borderWidth: 1,
-                borderColor: '#ccc',
+                borderColor: "#ccc",
                 borderRadius: 6,
                 padding: 8,
                 fontSize: 16,
-                backgroundColor: '#fff',
-                width: '50%',
-                textAlign: 'left',
-                alignSelf: 'center',
+                backgroundColor: "#fff",
+                width: "50%",
+                textAlign: "left",
+                alignSelf: "center",
               }}
             />
           </View>
@@ -92,22 +92,18 @@ export function ProjectTaskStep({
         <View
           style={
             mode === "welcome"
-              ? [styles.buttonRow, { width: '100%', justifyContent: 'center', alignItems: 'center' }]
-              : [styles.buttonRow, { marginBottom: 24, width: '100%', justifyContent: 'center', alignItems: 'center' }]
+              ? [styles.buttonRow, { width: "100%", justifyContent: "center", alignItems: "center" }]
+              : [styles.buttonRow, { marginBottom: 24, width: "100%", justifyContent: "center", alignItems: "center" }]
           }
         >
           {mode === "welcome" ? (
             <>
               {onLogout && (
-                <View style={styles.button}> 
-                  <Button
-                    title="Cerrar sesión"
-                    color="#b71c1c"
-                    onPress={onLogout}
-                  />
+                <View style={styles.button}>
+                  <Button title="Cerrar sesión" color="#b71c1c" onPress={onLogout} />
                 </View>
               )}
-              <View style={styles.button}> 
+              <View style={styles.button}>
                 <Button
                   title="Entrada"
                   color="#b71c1c"
@@ -120,18 +116,13 @@ export function ProjectTaskStep({
             </>
           ) : (
             <>
-              <View style={styles.button}> 
-                <Button
-                  title="Cancelar"
-                  color="#b71c1c"
-                  onPress={onCancel}
-                  disabled={loading}
-                />
+              <View style={styles.button}>
+                <Button title="Cancelar" color="#b71c1c" onPress={onCancel} disabled={loading} />
               </View>
-              <View style={styles.button}> 
+              <View style={styles.button}>
                 <Button
                   title="Continuar"
-                  color="#b71c1c"
+                  color={continueButtonColor || "#b71c1c"}
                   onPress={onContinue}
                   disabled={loading || !selectedProject || !selectedTask}
                 />
@@ -140,7 +131,7 @@ export function ProjectTaskStep({
           )}
         </View>
       </View>
-      {/* Modal de éxito */}
+
       <SuccessModal
         visible={successModalVisible}
         message={successMessage}
