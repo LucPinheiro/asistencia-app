@@ -256,6 +256,7 @@ export default function ProjectTaskDropdowns({
           <Text style={{ color: '#888', marginTop: 8 }}>No hay actividades disponibles para este proyecto</Text>
         )}
       </View>
+      
 
       {/* Texto de ayuda */}
       <View style={ProjectTaskDropdownsStyles.helpContainer}>
